@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flask-app-test
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      name: flask-app-test
+  template:
+    metadata:
+      labels:
+        name: flask-app-test
+    spec:
+      containers:
+      - name: myapp
+        image: ankimittal/k8-1
+        ports:
+        - containerPort: 30017
