@@ -2,6 +2,7 @@ node {
     stage('Get Source'){
         git 'https://github.com/ankie3596/k8_jenkins_IBM-2.git'
     }
+    IBM_API_KEY =$1
    
     stage('Docker-push'){
         docker.withRegistry('https://registry.hub.docker.com','DockerId'){
@@ -11,7 +12,7 @@ node {
     }
     stage('Authenticate'){
         
-        bat ''' ibmcloud login --apikey {IBM_API_KEY} -r  us-south -g Default
+        bat ''' ibmcloud login --apikey {$IBM_API_KEY} -r  us-south -g Default
             ibmcloud plugin install -f container-service
             ibmcloud plugin install -f container-registry
             ibmcloud plugin install -f observe-service
